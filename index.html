@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .remove {
+            background-color: red;
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 3px #333;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: #333;
+        }
+    </style>
+    <title>Task Manager</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(task, index) in currentTasks">
+                <input v-if="!task.done" @change="doneTask(task)" type="checkbox">
+                <span v-if="!task.edit" @dblclick="getEditInput(index)"
+                    v-bind:class="{done: task.done}">{{task.task}}</span>
+                <input @keydown.enter="editTask(index)" v-model="editInputTask" v-else type="text">
+                <button @click="removeTask(index)" class="remove">x</button>
+            </li>
+        </ul>
+        <input @keydown.enter="setNewTask" v-model="inputTask" type="text">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
