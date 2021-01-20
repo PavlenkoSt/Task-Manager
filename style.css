@@ -15,10 +15,10 @@
     border-collapse: collapse;
     float: left;
     width: 400px;
-    height: 300px;
     table-layout: fixed;
     box-shadow: 0 0 10px #333;
     padding: 20px;
+    height: 100%;
 }
 
 .format-week {
@@ -31,14 +31,34 @@
 
 .table tbody td:hover {
     background-color: rgb(79, 192, 79);
-    color: #fff;
+    color: #fff !important;
 }
 
 .table tbody td {
     border: 1px solid rgb(175, 175, 175);
     cursor: pointer;
+    height: 50px;
 }
 
 .table thead tr:last-child {
     background-color: #dedada;
+}
+.table thead td {
+    cursor: default;
+}
+.table button {
+    border: none;
+    margin: 0;
+    background-color: rgb(121, 121, 121);
+    height: 40px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: all ease 0.1s;
+}
+.table button:hover {
+    background-color: rgb(56, 56, 56);
 }
