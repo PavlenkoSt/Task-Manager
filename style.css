@@ -1,14 +1,37 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background: url("https://styledme.com/wp-content/uploads/2020/05/professional-office-virtual-zoom-background-images.jpg")
+        center no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+body:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.74);
+}
+
 .container {
     max-width: 1200px;
     width: 100%;
     padding: 0 15px;
     margin: 0 auto;
-    margin-top: 50px;
+    padding-top: 100px;
 }
 
 .calendar {
     width: 400px;
     box-shadow: 2px 2px 3px #333;
+    position: relative;
+    z-index: 1;
 }
 
 .table {
@@ -19,6 +42,7 @@
     box-shadow: 0 0 10px #333;
     padding: 20px;
     height: 100%;
+    background-color: #fff;
 }
 
 .format-week {
@@ -62,7 +86,7 @@
     background-color: rgb(56, 56, 56);
 }
 .active {
-    background-color: rgb(79, 192, 79) !important;
+    background-color: rgba(151, 151, 151, 0.89) !important;
     color: #fff !important;
 }
 .task-list {
@@ -71,6 +95,18 @@
     box-shadow: 0 0 5px #333;
     width: 500px;
     margin-right: 120px;
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+}
+.no-tasks {
+    text-align: center;
+}
+.tasks-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 .remove {
     background-color: red;
@@ -82,7 +118,35 @@
     outline: none;
 }
 
-.done {
+.done-list {
     text-decoration: line-through;
     color: #333;
+}
+.active-task {
+    border-radius: 100%;
+    position: relative;
+    background-color: rgba(255, 102, 0, 0.8) !important;
+    color: #fff !important;
+}
+.active-task:hover {
+    background-color: rgba(255, 102, 0, 0.9) !important;
+}
+.deadline {
+    border-radius: 100%;
+    position: relative;
+    background-color: rgba(226, 0, 0, 0.85) !important;
+    color: #fff !important;
+}
+.deadline:hover {
+    background-color: rgba(226, 0, 0, 0.95) !important;
+}
+.done-cell {
+    border-radius: 100%;
+    position: relative;
+    background-color: rgba(0, 128, 0, 0.699) !important;
+    color: #fff !important;
+}
+
+.done-cell:hover {
+    background-color: rgba(0, 128, 0, 0.8) !important;
 }

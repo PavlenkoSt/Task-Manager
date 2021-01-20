@@ -11,6 +11,9 @@ let app = new Vue({
         inputTask: '',
         currentTasks: [],
         editInputTask: '',
+        allTasks: {},
+        taskDates: [],
+        fullDateStr: '',
     },
     methods: {
         calendar: function () {
@@ -38,7 +41,6 @@ let app = new Vue({
             if (days[0].length > 0) {
                 for (let i = days[0].length; i < 7; i++) {
                     days[0].unshift('');
-
                 }
             }
             return days;
@@ -50,7 +52,7 @@ let app = new Vue({
                 this.month--;
                 this.year--;
             }
-
+            this.removeActive();
         },
         increase: function () {
             this.month++;
@@ -59,9 +61,15 @@ let app = new Vue({
                 this.month++;
                 this.year++;
             }
+            this.removeActive();
         },
         setActive(day) {
             this.activeDay = day.index;
+            this.getDayTasks();
+            this.getFullDate(day);
+        },
+        removeActive() {
+            this.activeDay = '';
         },
         setNewTask() {
             if (this.inputTask) {
@@ -71,6 +79,7 @@ let app = new Vue({
                     edit: false,
                 });
                 this.inputTask = '';
+                this.setDayTasks();
             }
         },
         doneTask(task) {
@@ -78,22 +87,101 @@ let app = new Vue({
         },
         removeTask(index) {
             this.currentTasks.splice(index, 1);
+            this.setDayTasks();
         },
         getEditInput(index) {
+            this.cancelEdit();
             this.currentTasks[index].edit = true;
             this.editInputTask = this.currentTasks[index].task;
+        },
+        cancelEdit() {
+            for (let task of this.currentTasks) {
+                if (task.edit) {
+                    task.edit = false;
+                }
+            }
         },
         editTask(index) {
             this.currentTasks[index].task = this.editInputTask;
             this.currentTasks[index].edit = false;
+            this.setDayTasks();
         },
         getCurrentTask() {
             return this.currentTasks.length > 0;
-        }
+        },
+        setDayTasks() {
+            this.allTasks[`${this.activeDay}-${this.month}-${this.year}`] = this.currentTasks;
+            if (!this.allTasks[`${this.activeDay}-${this.month}-${this.year}`].length) {
+                delete this.allTasks[`${this.activeDay}-${this.month}-${this.year}`];
+            }
+            this.getAllTasksDates();
+            this.detectTasksDays();
+            // console.log(this.taskDates);
+            // console.log(this.allTasks);
+        },
+        getDayTasks() {
+            if (this.allTasks[`${this.activeDay}-${this.month}-${this.year}`]) {
+                this.currentTasks = this.allTasks[`${this.activeDay}-${this.month}-${this.year}`];
+            } else {
+                this.currentTasks = [];
+            }
+        },
+        getAllTasksDates() {
+            if (Object.keys(this.allTasks)) {
+                this.taskDates = Object.keys(this.allTasks);
+            }
+        },
+        doneDayTasks(day) {
+            let flag = true;
+            let arr = this.allTasks[`${day}-${this.month}-${this.year}`];
+            if (arr) {
+                for (let dayTasks of arr) {
+                    if (!dayTasks.done) {
+                        flag = false;
+                    }
+                }
+                return flag;
+            }
+            return false;
+        },
+        isDeadline(day) {
+            let dateNov = new Date();
+            let dateTask = new Date(this.year, this.month, day + 1);
+            let arr = this.allTasks[`${day}-${this.month}-${this.year}`];
+            let flag = false;
+            if (arr) {
+                if (dateNov > dateTask) {
+                    flag = true;
+                }
+                return flag;
+            }
+            return false;
+        },
+        detectTasksDays(day) {
+            let flag = false;
+            if (this.taskDates.length) {
+                this.taskDates.forEach(date => {
+                    let dateArr = date.split('-');
+                    if (day == dateArr[0] && this.month == dateArr[1] && this.year == dateArr[2]) {
+                        flag = true;
+                    }
+                });
+            }
+            return flag;
+        },
+        getFullDate(day) {
+            this.fullDateStr = `${this.getZero(day.index)}.${this.getZero(this.month + 1)}.${String(this.year)}`;
+        },
+        getZero(str) {
+            if (str < 10) {
+                return 0 + String(str);
+            }
+            return String(str);
+        },
     },
     computed: {
         getActive() {
             return this.activeDay;
         },
-    }
+    },
 });
