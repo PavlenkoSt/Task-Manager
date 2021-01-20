@@ -30,8 +30,7 @@
 }
 
 .table tbody td:hover {
-    background-color: rgb(79, 192, 79);
-    color: #fff !important;
+    background-color: rgb(216, 216, 216);
 }
 
 .table tbody td {
@@ -61,4 +60,29 @@
 }
 .table button:hover {
     background-color: rgb(56, 56, 56);
+}
+.active {
+    background-color: rgb(79, 192, 79) !important;
+    color: #fff !important;
+}
+.task-list {
+    padding: 20px;
+    float: right;
+    box-shadow: 0 0 5px #333;
+    width: 500px;
+    margin-right: 120px;
+}
+.remove {
+    background-color: red;
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 3px #333;
+    outline: none;
+}
+
+.done {
+    text-decoration: line-through;
+    color: #333;
 }

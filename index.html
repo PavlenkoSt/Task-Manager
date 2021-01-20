@@ -30,12 +30,27 @@
 					</thead>
 					<tbody>
 						<tr v-for="week in calendar()">
-							<td v-for="(day, index) in week"
+							<td v-bind:class="{active: getActive == day.index}" @click="setActive(day)"
+								v-for="(day, index) in week"
 								:style="{'color': day.weekend, 'background-color': day.current}">
 								{{ day.index }} </td>
 						</tr>
 					</tbody>
 				</table>
+			</div>
+			<div class="task-list" v-if="getActive">
+				<ul>
+					<li v-for="(task, index) in currentTasks">
+						<input v-if="!task.done" @change="doneTask(task)" type="checkbox">
+						<span v-if="!task.edit" @dblclick="getEditInput(index)"
+							v-bind:class="{done: task.done}">{{task.task}}</span>
+						<input @keydown.enter="editTask(index)" v-model="editInputTask" v-else type="text">
+						<button @click="removeTask(index)" class="remove">x</button>
+					</li>
+					<p v-if="!currentTasks.length">Задач пока нет.</p>
+				</ul>
+				<label for="newTask">Добавьте новую задачу: <input @keydown.enter="setNewTask" v-model="inputTask"
+						type="text" id="newTask"></label>
 			</div>
 		</div>
 	</div>

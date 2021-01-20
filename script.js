@@ -7,6 +7,10 @@ let app = new Vue({
         day: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
         monthes: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
         date: new Date(),
+        activeDay: '',
+        inputTask: '',
+        currentTasks: [],
+        editInputTask: '',
     },
     methods: {
         calendar: function () {
@@ -23,7 +27,6 @@ let app = new Vue({
                 }
                 else {
                     week++;
-
                     days[week] = [];
                     a = { index: i };
                     days[week].push(a);
@@ -50,7 +53,6 @@ let app = new Vue({
 
         },
         increase: function () {
-
             this.month++;
             if (this.month > 11) {
                 this.month = -1;
@@ -58,5 +60,40 @@ let app = new Vue({
                 this.year++;
             }
         },
+        setActive(day) {
+            this.activeDay = day.index;
+        },
+        setNewTask() {
+            if (this.inputTask) {
+                this.currentTasks.push({
+                    task: this.inputTask,
+                    done: false,
+                    edit: false,
+                });
+                this.inputTask = '';
+            }
+        },
+        doneTask(task) {
+            task.done = true;
+        },
+        removeTask(index) {
+            this.currentTasks.splice(index, 1);
+        },
+        getEditInput(index) {
+            this.currentTasks[index].edit = true;
+            this.editInputTask = this.currentTasks[index].task;
+        },
+        editTask(index) {
+            this.currentTasks[index].task = this.editInputTask;
+            this.currentTasks[index].edit = false;
+        },
+        getCurrentTask() {
+            return this.currentTasks.length > 0;
+        }
     },
+    computed: {
+        getActive() {
+            return this.activeDay;
+        },
+    }
 });
