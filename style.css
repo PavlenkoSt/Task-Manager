@@ -484,3 +484,11 @@ span.load:after {
         right: 5px;
     }
 }
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}

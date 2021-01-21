@@ -44,31 +44,34 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="task-list" v-if="getActive">
-				<button @click="removeActive" class="tasks-close">x</button>
-				<span class="date">{{fullDateStr}}</span>
-				<ul>
-					<li v-for="(task, index) in currentTasks">
-						<span class="checkbox" v-if="!task.done"><input @change="doneTask(task)" type="checkbox"></span>
-						<span class="task-text" v-if="!task.edit" @dblclick="getEditInput(index)"
-							v-bind:class="{'done-list': task.done}"
-							title="Двойной клик для редактирования">{{task.task}}</span>
-						<input @keydown.enter="editTask(index)" @blur="editTask(index)"
-							v-bind:class="{'done-list': task.done}" v-model="editInputTask" v-else type="text"
-							class="edit-task">
-						<div class="remove-task"><button @click="removeTask(index)" class="remove">Удалить</button>
-						</div>
-					</li>
-				</ul>
-				<p v-if="!currentTasks.length" class="no-tasks">Задач пока нет.</p>
-				<div class="task-list__footer">
-					<label for="newTask" v-bind:class="{set: activeAddInput == true}"><span class="label">Добавьте
-							новую
-							задачу:</span><input @blur="deactivateAddInput" @focus="activateAddInput"
-							@keydown.enter="setNewTask" v-model="inputTask" type="text" class="add-task"
-							id="newTask"></label>
+			<transition name="fade">
+				<div class="task-list" v-if="getActive">
+					<button @click="removeActive" class="tasks-close">x</button>
+					<span class="date">{{fullDateStr}}</span>
+					<ul>
+						<li v-for="(task, index) in currentTasks">
+							<span class="checkbox" v-if="!task.done"><input @change="doneTask(task)"
+									type="checkbox"></span>
+							<span class="task-text" v-if="!task.edit" @dblclick="getEditInput(index)"
+								v-bind:class="{'done-list': task.done}"
+								title="Двойной клик для редактирования">{{task.task}}</span>
+							<input @keydown.enter="editTask(index)" @blur="editTask(index)"
+								v-bind:class="{'done-list': task.done}" v-model="editInputTask" v-else type="text"
+								class="edit-task">
+							<div class="remove-task"><button @click="removeTask(index)" class="remove">Удалить</button>
+							</div>
+						</li>
+					</ul>
+					<p v-if="!currentTasks.length" class="no-tasks">Задач пока нет.</p>
+					<div class="task-list__footer">
+						<label for="newTask" v-bind:class="{set: activeAddInput == true}"><span class="label">Добавьте
+								новую
+								задачу:</span><input @blur="deactivateAddInput" @focus="activateAddInput"
+								@keydown.enter="setNewTask" v-model="inputTask" type="text" class="add-task"
+								id="newTask"></label>
+					</div>
 				</div>
-			</div>
+			</transition>
 		</div>
 	</div>
 	<div class="info">
