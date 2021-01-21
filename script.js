@@ -1,6 +1,7 @@
 let app = new Vue({
     el: '#app',
     data: {
+        load: false,
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
         dFirstMonth: '1',
@@ -157,7 +158,6 @@ let app = new Vue({
         },
         detectTasksDays(day) {
             let flag = false;
-
             if (this.taskDates.length) {
                 this.taskDates.forEach(date => {
                     let dateArr = date.split('-');
@@ -207,6 +207,7 @@ let app = new Vue({
         window.addEventListener('load', () => {
             this.initSaveValuesLocalStorage();
             this.getAllTasksDates();
+            this.load = true;
         })
     },
 });

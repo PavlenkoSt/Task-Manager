@@ -13,6 +13,9 @@
 
 <body>
 	<div id="app">
+		<section v-bind:class="{hide: load == true}">
+			<span class="load"></span>
+		</section>
 		<div class="container">
 			<div class="calendar">
 				<table class="table">
