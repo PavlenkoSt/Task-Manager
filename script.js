@@ -18,7 +18,7 @@ let app = new Vue({
         activeAddInput: false,
     },
     methods: {
-        calendar: function () {
+        calendar() {
             let days = [];
             let week = 0;
             days[week] = [];
@@ -47,7 +47,7 @@ let app = new Vue({
             }
             return days;
         },
-        decrease: function () {
+        decrease() {
             this.month--;
             if (this.month < 0) {
                 this.month = 12;
@@ -56,7 +56,7 @@ let app = new Vue({
             }
             this.removeActive();
         },
-        increase: function () {
+        increase() {
             this.month++;
             if (this.month > 11) {
                 this.month = -1;
