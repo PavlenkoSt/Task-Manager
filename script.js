@@ -1,6 +1,7 @@
 let app = new Vue({
     el: '#app',
     data: {
+        activeAddInput: false,
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
         dFirstMonth: '1',
@@ -14,7 +15,6 @@ let app = new Vue({
         allTasks: {},
         taskDates: [],
         fullDateStr: '',
-        activeAddInput: false,
     },
     methods: {
         calendar: function () {
@@ -180,12 +180,12 @@ let app = new Vue({
             return String(str);
         },
         activateAddInput() {
-           if(!this.activeAddInput){
-            this.activeAddInput = true;
-           }
+            if (!this.activeAddInput) {
+                this.activeAddInput = true;
+            }
         },
         deactivateAddInput() {
-            if(this.activeAddInput){
+            if (this.activeAddInput) {
                 this.activeAddInput = false;
             }
         },
