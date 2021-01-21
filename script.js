@@ -14,7 +14,7 @@ let app = new Vue({
         allTasks: {},
         taskDates: [],
         fullDateStr: '',
-        activeAddInput: false,
+        // activeAddInput: false,
     },
     methods: {
         calendar: function () {
@@ -179,12 +179,12 @@ let app = new Vue({
             }
             return String(str);
         },
-        activateAddInput() {
-            this.activeAddInput = true;
-        },
-        deactivateAddInput() {
-            this.activeAddInput = false;
-        },
+        // activateAddInput() {
+        //     this.activeAddInput = true;
+        // },
+        // deactivateAddInput() {
+        //     this.activeAddInput = false;
+        // },
     },
     computed: {
         getActive() {

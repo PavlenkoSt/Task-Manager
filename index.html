@@ -57,10 +57,9 @@
 				</ul>
 				<p v-if="!currentTasks.length" class="no-tasks">Задач пока нет.</p>
 				<div class="task-list__footer">
-					<label for="newTask" v-bind:class="{set: activeAddInput==true}"><span class="label">Добавьте новую
-							задачу:</span><input @blur="deactivateAddInput" @focus="activateAddInput"
-							@keydown.enter="setNewTask" v-model="inputTask" type="text" class="add-task"
-							id="newTask"></label>
+					<label for="newTask" v-bind:class="{set: activeAddInput}"><span class="label">Добавьте новую
+							задачу:</span><input @keydown.enter="setNewTask" v-model="inputTask" type="text"
+							class="add-task" id="newTask"></label>
 				</div>
 			</div>
 		</div>
