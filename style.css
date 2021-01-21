@@ -1,3 +1,8 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 body {
     width: 100vw;
     height: 100vh;
@@ -8,6 +13,7 @@ body {
     position: relative;
     padding: 0;
     margin: 0;
+    font-family: "Roboto", sans-serif;
 }
 body:after {
     content: "";
@@ -98,6 +104,7 @@ body:after {
     background-color: #fff;
     position: relative;
     z-index: 1;
+    padding-top: 35px;
 }
 .no-tasks {
     text-align: center;
@@ -107,20 +114,121 @@ body:after {
     top: 10px;
     right: 10px;
     cursor: pointer;
-}
-.remove {
-    background-color: red;
+    background-color: rgb(211, 42, 42);
     border: none;
     color: #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 3px #333;
+    box-shadow: 1px 1px 2px #333;
+    transition: all ease 0.1s;
     outline: none;
+}
+.tasks-close:hover {
+    box-shadow: 0 0 0 #333;
+    transform: translate(1px, 1px);
+}
+.date {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    position: absolute;
+    top: 10px;
+    cursor: default;
+    left: 10px;
+}
+.task-list__footer {
+    margin-top: 35px;
+}
+label {
+    position: relative;
+    margin-top: 15px;
+}
+label.set .label {
+    transform: translateY(-250%);
+    color: green;
+    font-weight: 700;
+    font-size: 13px;
+    left: 0;
+}
+.label {
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #333;
+    cursor: text;
+    transition: all ease 0.1s;
+}
+.add-task {
+    font-size: 14px;
+    padding: 5px 10px;
+    outline: none;
+    border: 1px solid #333;
+    transition: all ease 0.1s;
+    width: 100%;
+}
+ul {
+    padding: 0;
+}
+li {
+    list-style: none;
+    border: 1px solid rgb(168, 168, 168);
+    display: flex;
+    margin-bottom: 1px;
+}
+.checkbox {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-right: 1px solid rgb(168, 168, 168);
+}
+.checkbox input {
+    cursor: pointer;
+}
+.task-text {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-right: 1px solid rgb(168, 168, 168);
+}
+.edit-task {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    color: green;
+    font-size: 14px;
+}
+.remove-task {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.remove {
+    background-color: rgb(151, 38, 38);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 10px;
+    transition: all ease 0.1s;
+}
+.remove:hover {
+    background-color: rgb(184, 25, 25);
 }
 
 .done-list {
     text-decoration: line-through;
     color: #333;
+    width: 90%;
 }
 .active-task {
     border-radius: 100%;

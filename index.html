@@ -5,6 +5,9 @@
 	<title>Task Manager</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+		rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 </head>
 
@@ -40,19 +43,25 @@
 			</div>
 			<div class="task-list" v-if="getActive">
 				<button @click="removeActive" class="tasks-close">x</button>
-				<span>{{fullDateStr}}</span>
+				<span class="date">{{fullDateStr}}</span>
 				<ul>
 					<li v-for="(task, index) in currentTasks">
-						<input v-if="!task.done" @change="doneTask(task)" type="checkbox">
-						<span v-if="!task.edit" @dblclick="getEditInput(index)"
+						<span class="checkbox" v-if="!task.done"><input @change="doneTask(task)" type="checkbox"></span>
+						<span class="task-text" v-if="!task.edit" @dblclick="getEditInput(index)"
 							v-bind:class="{'done-list': task.done}">{{task.task}}</span>
-						<input @keydown.enter="editTask(index)" v-model="editInputTask" v-else type="text">
-						<button @click="removeTask(index)" class="remove">x</button>
+						<input @keydown.enter="editTask(index)" v-bind:class="{'done-list': task.done}"
+							v-model="editInputTask" v-else type="text" class="edit-task">
+						<div class="remove-task"><button @click="removeTask(index)" class="remove">Удалить</button>
+						</div>
 					</li>
-					<p v-if="!currentTasks.length" class="no-tasks">Задач пока нет.</p>
 				</ul>
-				<label for="newTask">Добавьте новую задачу: <input @keydown.enter="setNewTask" v-model="inputTask"
-						type="text" id="newTask"></label>
+				<p v-if="!currentTasks.length" class="no-tasks">Задач пока нет.</p>
+				<div class="task-list__footer">
+					<label for="newTask" v-bind:class="{set: activeAddInput}"><span class="label">Добавьте новую
+							задачу:</span><input @blur="deactivateAddInput" @focus="activateAddInput"
+							@keydown.enter="setNewTask" v-model="inputTask" type="text" class="add-task"
+							id="newTask"></label>
+				</div>
 			</div>
 		</div>
 	</div>
