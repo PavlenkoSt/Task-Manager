@@ -183,6 +183,7 @@ let app = new Vue({
             }
         },
         deactivateAddInput() {
+            this.inputTask = '';
             if (this.activeAddInput) {
                 this.activeAddInput = false;
             }
