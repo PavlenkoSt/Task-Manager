@@ -51,9 +51,11 @@
 					<li v-for="(task, index) in currentTasks">
 						<span class="checkbox" v-if="!task.done"><input @change="doneTask(task)" type="checkbox"></span>
 						<span class="task-text" v-if="!task.edit" @dblclick="getEditInput(index)"
-							v-bind:class="{'done-list': task.done}">{{task.task}}</span>
-						<input @keydown.enter="editTask(index)" v-bind:class="{'done-list': task.done}"
-							v-model="editInputTask" v-else type="text" class="edit-task">
+							v-bind:class="{'done-list': task.done}"
+							title="Двойной клик для редактирования">{{task.task}}</span>
+						<input @keydown.enter="editTask(index)" @blur="editTask(index)"
+							v-bind:class="{'done-list': task.done}" v-model="editInputTask" v-else type="text"
+							class="edit-task">
 						<div class="remove-task"><button @click="removeTask(index)" class="remove">Удалить</button>
 						</div>
 					</li>

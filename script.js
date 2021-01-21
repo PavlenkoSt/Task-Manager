@@ -194,9 +194,6 @@ let app = new Vue({
         initSaveValuesLocalStorage() {
             this.allTasks = JSON.parse(localStorage.getItem('tasks')) || {};
         },
-        test() {
-            console.log('work');
-        }
     },
     computed: {
         getActive() {
