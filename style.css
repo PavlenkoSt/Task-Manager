@@ -4,12 +4,12 @@
     box-sizing: border-box;
 }
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     background: url("https://styledme.com/wp-content/uploads/2020/05/professional-office-virtual-zoom-background-images.jpg")
         center no-repeat;
     background-size: cover;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     padding: 0;
     margin: 0;
@@ -18,21 +18,23 @@ body {
 body:after {
     content: "";
     width: 100%;
+    min-height: 100vh;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.74);
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     width: 100%;
-    padding: 0 15px;
+    min-height: 100vh;
+    padding: 15px;
     margin: 0 auto;
-    padding-top: 100px;
 }
-
 .calendar {
     width: 400px;
     box-shadow: 2px 2px 3px #333;
@@ -57,10 +59,6 @@ body:after {
 
 .table td {
     text-align: center;
-}
-
-.table tbody td:hover {
-    background-color: rgb(216, 216, 216);
 }
 
 .table tbody td {
@@ -88,31 +86,30 @@ body:after {
     width: 100%;
     transition: all ease 0.1s;
 }
-.table button:hover {
-    background-color: rgb(56, 56, 56);
-}
+
 .active {
     background-color: rgba(151, 151, 151, 0.89) !important;
     color: #fff !important;
 }
+
 .task-list {
     padding: 20px;
-    float: right;
     box-shadow: 0 0 5px #333;
-    width: 500px;
-    margin-right: 120px;
+    width: calc(100% - 415px);
+    margin-left: 415px;
     background-color: #fff;
     position: relative;
     z-index: 1;
     padding-top: 35px;
 }
+
 .no-tasks {
     text-align: center;
 }
 .tasks-close {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 20px;
     cursor: pointer;
     background-color: rgb(211, 42, 42);
     border: none;
@@ -121,10 +118,7 @@ body:after {
     transition: all ease 0.1s;
     outline: none;
 }
-.tasks-close:hover {
-    box-shadow: 0 0 0 #333;
-    transform: translate(1px, 1px);
-}
+
 .date {
     font-size: 15px;
     font-weight: 700;
@@ -132,7 +126,7 @@ body:after {
     position: absolute;
     top: 10px;
     cursor: default;
-    left: 10px;
+    left: 20px;
 }
 .task-list__footer {
     margin-top: 35px;
@@ -192,6 +186,7 @@ li {
     align-items: center;
     padding: 10px 15px;
     border-right: 1px solid rgb(168, 168, 168);
+    overflow: hidden;
 }
 .edit-task {
     width: 80%;
@@ -221,9 +216,6 @@ li {
     font-size: 10px;
     transition: all ease 0.1s;
 }
-.remove:hover {
-    background-color: rgb(184, 25, 25);
-}
 
 .done-list {
     text-decoration: line-through;
@@ -236,27 +228,21 @@ li {
     background-color: rgba(255, 102, 0, 0.8) !important;
     color: #fff !important;
 }
-.active-task:hover {
-    background-color: rgba(255, 102, 0, 0.9) !important;
-}
+
 .deadline {
     border-radius: 100%;
     position: relative;
     background-color: rgba(226, 0, 0, 0.85) !important;
     color: #fff !important;
 }
-.deadline:hover {
-    background-color: rgba(226, 0, 0, 0.95) !important;
-}
+
 .done-cell {
     border-radius: 100%;
     position: relative;
     background-color: rgba(0, 128, 0, 0.699) !important;
     color: #fff !important;
 }
-.done-cell:hover {
-    background-color: rgba(0, 128, 0, 0.8) !important;
-}
+
 /*
 Loader
 */
@@ -275,7 +261,6 @@ section {
 section.hide {
     display: none;
 }
-/* LOADER */
 
 span.load {
     display: flex;
@@ -358,5 +343,83 @@ span.load:after {
     }
     100% {
         transform: scale(0);
+    }
+}
+@media (min-width: 975px) {
+    .tasks-close:hover {
+        box-shadow: 0 0 0 #333;
+        transform: translate(1px, 1px);
+    }
+    .remove:hover {
+        background-color: rgb(184, 25, 25);
+    }
+    .table tbody td:hover {
+        background-color: rgb(216, 216, 216);
+    }
+    .table button:hover {
+        background-color: rgb(56, 56, 56);
+    }
+    .active-task:hover {
+        background-color: rgba(255, 102, 0, 0.9) !important;
+    }
+    .deadline:hover {
+        background-color: rgba(226, 0, 0, 0.95) !important;
+    }
+    .done-cell:hover {
+        background-color: rgba(0, 128, 0, 0.8) !important;
+    }
+}
+@media (max-width: 1000px) {
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+    }
+    .calendar {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .table {
+        width: 100%;
+    }
+    .table tbody td {
+        height: 80px;
+    }
+    .task-list {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+@media (max-width: 700px) {
+    .table tbody td {
+        height: 60px;
+    }
+    .remove-task {
+        width: 20%;
+    }
+}
+@media (max-width: 450px) {
+    .container {
+        padding: 5px;
+    }
+    .task-list {
+        padding: 5px;
+        padding-top: 35px;
+    }
+    .tasks-close {
+        right: 5px;
+        top: 5px;
+        width: 25px;
+        height: 25px;
+    }
+    .date {
+        left: 5px;
+    }
+    .table tbody td {
+        height: 50px;
+    }
+    .table button {
+        font-size: 8px;
+        padding: 5px;
     }
 }
