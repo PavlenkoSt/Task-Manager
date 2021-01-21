@@ -85,6 +85,7 @@ let app = new Vue({
         },
         doneTask(task) {
             task.done = true;
+            this.setLocalStorage();
         },
         removeTask(index) {
             this.currentTasks.splice(index, 1);
@@ -107,9 +108,6 @@ let app = new Vue({
             this.currentTasks[index].edit = false;
             this.setDayTasks();
         },
-        getCurrentTask() {
-            return this.currentTasks.length > 0;
-        },
         setDayTasks() {
             this.allTasks[`${this.activeDay}-${this.month}-${this.year}`] = this.currentTasks;
             if (!this.allTasks[`${this.activeDay}-${this.month}-${this.year}`].length) {
@@ -117,8 +115,7 @@ let app = new Vue({
             }
             this.getAllTasksDates();
             this.detectTasksDays();
-            // console.log(this.taskDates);
-            // console.log(this.allTasks);
+            this.setLocalStorage();
         },
         getDayTasks() {
             if (this.allTasks[`${this.activeDay}-${this.month}-${this.year}`]) {
@@ -160,6 +157,7 @@ let app = new Vue({
         },
         detectTasksDays(day) {
             let flag = false;
+
             if (this.taskDates.length) {
                 this.taskDates.forEach(date => {
                     let dateArr = date.split('-');
@@ -189,10 +187,26 @@ let app = new Vue({
                 this.activeAddInput = false;
             }
         },
+        setLocalStorage() {
+            let json = JSON.stringify(this.allTasks);
+            localStorage.setItem('tasks', json);
+        },
+        initSaveValuesLocalStorage() {
+            this.allTasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        },
+        test() {
+            console.log('work');
+        }
     },
     computed: {
         getActive() {
             return this.activeDay;
         },
+    },
+    created() {
+        window.addEventListener('load', () => {
+            this.initSaveValuesLocalStorage();
+            this.getAllTasksDates();
+        })
     },
 });
