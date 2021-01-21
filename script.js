@@ -1,7 +1,6 @@
 let app = new Vue({
     el: '#app',
     data: {
-        activeAddInput: false,
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
         dFirstMonth: '1',
@@ -15,6 +14,7 @@ let app = new Vue({
         allTasks: {},
         taskDates: [],
         fullDateStr: '',
+        activeAddInput: false,
     },
     methods: {
         calendar: function () {
