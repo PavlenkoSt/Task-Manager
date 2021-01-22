@@ -1,6 +1,5 @@
-let app = new Vue({
-    el: '#app',
-    data: {
+Vue.createApp({
+    data: () => ({
         load: false,
         month: new Date().getMonth(),
         year: new Date().getFullYear(),
@@ -16,7 +15,7 @@ let app = new Vue({
         taskDates: [],
         fullDateStr: '',
         activeAddInput: false,
-    },
+    }),
     methods: {
         calendar() {
             let days = [];
@@ -208,4 +207,4 @@ let app = new Vue({
             this.load = true;
         })
     },
-});
+}).mount('#app');

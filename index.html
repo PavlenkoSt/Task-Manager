@@ -13,7 +13,7 @@
 
 <body>
 	<div id="app">
-		<section v-bind:class="{hide: load == true}">
+		<section :class="{hide: load == true}">
 			<span class="load"></span>
 		</section>
 		<div class="container">
@@ -22,12 +22,12 @@
 					<thead>
 						<tr>
 							<td>
-								<button v-on:click="decrease">Назад
+								<button @click="decrease">Назад
 								</button>
 							</td>
 							<td colspan="5"> {{monthes[month]}} {{year}} </td>
 							<td>
-								<button v-on:click="increase">Вперед</button>
+								<button @click="increase">Вперед</button>
 							</td>
 						</tr>
 						<tr>
@@ -36,7 +36,7 @@
 					</thead>
 					<tbody>
 						<tr v-for="week in calendar()">
-							<td v-bind:class="{active: getActive == day.index && getActive != undefined, 'active-task': detectTasksDays(day.index), 'done-cell': doneDayTasks(day.index), deadline: !doneDayTasks(day.index) && isDeadline(day.index)}"
+							<td :class="{active: getActive == day.index && getActive != undefined, 'active-task': detectTasksDays(day.index), 'done-cell': doneDayTasks(day.index), deadline: !doneDayTasks(day.index) && isDeadline(day.index)}"
 								@click="setActive(day)" v-for="(day, index) in week"
 								:style="{'color': day.weekend, 'background-color': day.current}">
 								{{ day.index }} </td>
@@ -53,10 +53,10 @@
 							<span class="checkbox" v-if="!task.done"><input @change="doneTask(task)"
 									type="checkbox"></span>
 							<span class="task-text" v-if="!task.edit" @dblclick="getEditInput(index)"
-								v-bind:class="{'done-list': task.done}"
+								:class="{'done-list': task.done}"
 								title="Двойной клик для редактирования">{{task.task}}</span>
 							<input @keydown.enter="editTask(index)" @blur="editTask(index)"
-								v-bind:class="{'done-list': task.done}" v-model="editInputTask" v-else type="text"
+								:class="{'done-list': task.done}" v-model="editInputTask" v-else type="text"
 								class="edit-task">
 							<div class="remove-task"><button @click="removeTask(index)" class="remove">Удалить</button>
 							</div>
@@ -64,7 +64,7 @@
 					</ul>
 					<p v-if="!currentTasks.length" class="no-tasks">Задач пока нет.</p>
 					<div class="task-list__footer">
-						<label for="newTask" v-bind:class="{set: activeAddInput == true}"><span class="label">Добавьте
+						<label for="newTask" :class="{set: activeAddInput == true}"><span class="label">Добавьте
 								новую
 								задачу:</span><input @blur="deactivateAddInput" @focus="activateAddInput"
 								@keydown.enter="setNewTask" v-model="inputTask" type="text" class="add-task"
@@ -89,7 +89,8 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+	<script src="https://unpkg.com/vue@next"></script>
 	<script src="script.js"></script>
 </body>
 
